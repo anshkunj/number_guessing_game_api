@@ -106,22 +106,22 @@ multiplayer_game/
 
 ## Usage
 
-1. Register / Login
+### Register / Login
     - POST /register with username and password
     - POST /login to get JWT token
 
-2. Start a Game
+### Start a Game
     - Number Guess: POST /guess/start
     - Bulls & Cows: POST /bulls-cows/start
 
-3. Play
+### Play
     - Number Guess: POST /guess/play with guess (int)
     - Bulls & Cows: POST /bulls-cows/play with guess (str, 4 unique digits)
 
-4. Leaderboard
+### Leaderboard
     - GET /leaderboard shows top 10 players
 
-5. Global Chat
+### Global Chat
     - Connect WebSocket to /ws/chat
     - Send/receive messages in real-time
 
