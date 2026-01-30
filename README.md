@@ -136,8 +136,9 @@ multiplayer_game/
 
 ---
 
-## Future Improvements
-
+## 🤝 Contributors  
+Contributors are welcome 
+Add features :
 - Friends-only chat
 - Daily/weekly leaderboard reset
 - Additional games
@@ -147,18 +148,23 @@ multiplayer_game/
 
 ---
 
-## License
 
-MIT License  
-Free to use, modify, and extend.  
+## 👤 Author
+**anshkunj**  
+GitHub: https://github.com/anshkunj  
+Fiverr: https://www.fiverr.com/s/xX9mNXB  
+LinkedIn: https://linkedin.com/in/anshkunj 
 
 ---
 
-## Contact
+## ⭐ Support
+If you found this project helpful, give it a star ⭐  
+It motivates me to build more real-world APIs 🚀
 
-Made with ❤️ by Kunj  
-- Portfolio: [Your Portfolio URL]  
-- LinkedIn: [Your LinkedIn URL]  
+---
+
+## 🔹 Note
+This repository is regularly updated with new scripts and improvements 
 
 ---
 
