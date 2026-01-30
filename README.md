@@ -175,4 +175,4 @@ This repository is regularly updated with new scripts and improvements
 
 ---
 
-> “Play, compete, chat, and climb the leaderboard — all in one real-time multiplayer-style game !”
+> “Play, compete, chat, and climb the leaderboard — all in one real-time multiplayer-game !”
