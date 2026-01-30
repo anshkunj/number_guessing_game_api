@@ -1,0 +1,112 @@
+from fastapi import FastAPI, Depends, WebSocket
+from sqlalchemy.orm import Session
+from database import Base, engine, SessionLocal
+from models import User, Game
+from schemas import Register, LoginResponse, Guess, BullsCowsGuess
+from logic import generate_bulls_cows_number, check_bulls_cows
+from auth import get_db, hash_password, verify_password, create_token, get_current_user, oauth2_scheme
+from chat import manager
+
+Base.metadata.create_all(engine)
+
+app = FastAPI(title="Multiplayer Number Game API")
+
+# ---------------- AUTH ----------------
+@app.post("/register")
+def register(data: Register, db: Session = Depends(get_db)):
+    if db.query(User).filter(User.username == data.username).first():
+        raise HTTPException(400, "Username exists")
+    user = User(username=data.username, password=hash_password(data.password))
+    db.add(user)
+    db.commit()
+    return {"message": "User created"}
+
+@app.post("/login")
+def login(form: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
+    user = db.query(User).filter(User.username == form.username).first()
+    if not user or not verify_password(form.password, user.password):
+        raise HTTPException(status_code=401)
+    token = create_token({"user_id": user.id})
+    return {"access_token": token, "token_type": "bearer"}
+
+# ---------------- NUMBER GUESS ----------------
+@app.post("/guess/start")
+def start_guess(user: User = Depends(get_current_user), db: Session = Depends(get_db)):
+    game = Game(user_id=user.id, game_type="guess", secret=str(random.randint(1,100)), lives=7)
+    db.add(game)
+    db.commit()
+    return {"message": "Guess started", "lives":"♥️"*7}
+
+@app.post("/guess/play")
+def play_guess(data: Guess, user: User = Depends(get_current_user), db: Session = Depends(get_db)):
+    game = db.query(Game).filter(Game.user_id==user.id, Game.game_type=="guess", Game.status=="active").first()
+    if not game: raise HTTPException(400, "No active game")
+
+    game.attempts +=1
+    if data.guess == int(game.secret):
+        game.status="won"
+        bonus = game.lives*5
+        user.score += 50+bonus
+        user.wins +=1
+        db.commit()
+        return {"result":"WIN 🎉","attempts":game.attempts,"points_earned":50+bonus,"total_score":user.score}
+
+    game.lives -=1
+    if game.lives<=0:
+        game.status="lost"
+        db.commit()
+        return {"result":"GAME OVER 💀","number":game.secret}
+
+    db.commit()
+    return {"hint":"too low" if data.guess<int(game.secret) else "too high","lives":"♥️"*game.lives}
+
+# ---------------- BULLS & COWS ----------------
+@app.post("/bulls-cows/start")
+def start_bulls_cows(user: User = Depends(get_current_user), db: Session = Depends(get_db)):
+    game = Game(user_id=user.id, game_type="bulls_cows", secret=generate_bulls_cows_number(), lives=10)
+    db.add(game)
+    db.commit()
+    return {"message": "Bulls & Cows started", "lives":"♥️"*10}
+
+@app.post("/bulls-cows/play")
+def play_bulls_cows(data: BullsCowsGuess, user: User = Depends(get_current_user), db: Session = Depends(get_db)):
+    game = db.query(Game).filter(Game.user_id==user.id, Game.game_type=="bulls_cows", Game.status=="active").first()
+    if not game: raise HTTPException(400, "No active game")
+    if len(data.guess)!=4 or not data.guess.isdigit() or len(set(data.guess))!=4:
+        raise HTTPException(400, "Guess must be 4 unique digits")
+
+    game.attempts +=1
+    bulls, cows = check_bulls_cows(game.secret, data.guess)
+    if bulls==4:
+        game.status="won"
+        bonus = game.lives*5
+        user.score += 50+bonus
+        user.wins +=1
+        db.commit()
+        return {"result":"WIN 🎉","attempts":game.attempts,"points_earned":50+bonus,"total_score":user.score}
+
+    game.lives -=1
+    if game.lives<=0:
+        game.status="lost"
+        db.commit()
+        return {"result":"GAME OVER 💀","secret":game.secret}
+
+    db.commit()
+    return {"bulls":bulls,"cows":cows,"lives":"♥️"*game.lives}
+
+# ---------------- LEADERBOARD ----------------
+@app.get("/leaderboard")
+def leaderboard(db: Session = Depends(get_db)):
+    users = db.query(User).order_by(User.score.desc()).limit(10).all()
+    return [{"rank":i+1,"username":u.username,"score":u.score,"wins":u.wins} for i,u in enumerate(users)]
+
+# ---------------- GLOBAL CHAT ----------------
+@app.websocket("/ws/chat")
+async def global_chat(websocket: WebSocket):
+    await manager.connect(websocket)
+    try:
+        while True:
+            data = await websocket.receive_text()
+            await manager.broadcast(data)
+    except:
+        manager.disconnect(websocket)
