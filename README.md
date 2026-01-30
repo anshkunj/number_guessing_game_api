@@ -22,11 +22,11 @@ This project is fully modular and production-ready for learning, portfolio, or d
 - Track scores and wins per user
 
 ### 🎯 Games
-- Number Guess
+#### Number Guess
     - Guess the number 1–100
     - Lives ♥️ decrease with each wrong attempt
     - Win → points added
-- Bulls & Cows
+#### Bulls & Cows
     - Guess 4 unique digits
     - Receive bulls & cows hints
     - Lives ♥️ tracking & scoring
