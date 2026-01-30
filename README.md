@@ -55,9 +55,9 @@ This project is fully modular and production-ready for learning, portfolio, or d
 
 ## Project Structure
 
-multiplayer_game/
-    main.py             # Entry point, routes
-    models.py           # Database models (User, Game)
+multiplayer_game/  
+    main.py             # Entry point, routes  
+    models.py           # Database   models (User, Game)
     logic.py            # Game logic (Bulls & Cows, hints)
     auth.py             # JWT auth, register/login, password hashing
     chat.py             # WebSocket chat manager
