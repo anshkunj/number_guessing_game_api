@@ -81,24 +81,24 @@ multiplayer_game/
 
 ## Setup & Installation
 
-1. Clone the repo:
+### Clone the repo:
 
     git clone https://github.com/yourusername/multiplayer-game.git
     cd multiplayer-game
 
-2. Install dependencies:
+### Install dependencies:
 
     pip install -r requirements.txt
 
-3. Run the server:
+### Run the server:
 
     uvicorn main:app --reload
 
-4. Open API docs to explore endpoints:
+### Open API docs to explore endpoints:
 
     http://127.0.0.1:8000/docs
 
-5. Connect to global chat WebSocket:
+### Connect to global chat WebSocket:
 
     ws://127.0.0.1:8000/ws/chat
 
