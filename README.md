@@ -19,3 +19,31 @@ A simple REST API that lets users play a number guessing game. The API generates
 
 ---
 
+## 📄 License
+
+MIT License
+
+---
+
+## 🤝 Contributing
+Contributors are welcome!  
+• Add more games.
+
+---
+
+## 👤 Author
+**anshkunj**  
+GitHub: https://github.com/anshkunj  
+Fiverr: https://www.fiverr.com/s/xX9mNXB  
+LinkedIn: https://linkedin.com/in/anshkunj 
+
+---
+
+## ⭐ Support
+If you found this project helpful, give it a star ⭐  
+It motivates me to build more real-world APIs 🚀
+
+---
+
+## 🔹 Note
+This repository is regularly updated with new scripts and improvements.
