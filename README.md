@@ -1,4 +1,4 @@
-# Multiplayer Number Game Backend 🎮🌍
+# Multiplayer-game 🎮🌍
 
 A real-time multiplayer-style game backend built with FastAPI, featuring:
 
