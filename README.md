@@ -3,7 +3,7 @@
 </p>
 
 <h1 align="center">Multiplayer-Game</h1>
-<p align="center">Play,chat and climb the leaderboard 🚀</p>
+<p align="center">Play,compete,chat and climb the leaderboard 🚀</p>
 
 # Multiplayer-game 🎮🌍
 
