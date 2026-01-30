@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: multiplayer-game-backend
+    name: multiplayer-game
     env: python
     region: oregon
     plan: free
