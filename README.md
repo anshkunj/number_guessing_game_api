@@ -21,14 +21,14 @@ A simple REST API that lets users play a number guessing game. The API generates
 ---
 
 ## 📌 Endpoints
-### 1️⃣ /health
+### 0️⃣ /health
 **Method:** GET  
 Check if the API is up and running.  
 **Responses:**  
 - 200 OK – API is healthy.  
 Example: "API is running!"
 
-### 2️⃣ /guess/{number}
+### 1️⃣ /guess/{number}
 **Method:** GET  
 Submit a guess for the current game.  
 **Path Parameter:**  
@@ -49,7 +49,7 @@ Example:
   ]
 }
 
-### 3️⃣ /reset
+### 2️⃣ /reset
 **Method:** GET  
 Resets the current game and generates a new random number.  
 **Responses:**  
