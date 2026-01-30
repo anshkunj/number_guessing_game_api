@@ -9,6 +9,7 @@ A simple REST API that lets users play a number guessing game. The API generates
 - Guess validation via API endpoints  
 - Real-time feedback  
 - Easy to integrate with frontend apps, bots, or games  
+- Health check for API status 
 
 ---
 
