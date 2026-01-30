@@ -1,98 +1,165 @@
-# Number Guessing Game API 🎯
+# Multiplayer Number Game Backend 🎮🌍
 
-A simple REST API that lets users play a number guessing game. The API generates a random number and responds to user guesses with hints like **Too High**, **Too Low**, or **Correct**. Built with **Python** and **FastAPI**.
+A real-time multiplayer-style game backend built with FastAPI, featuring:
 
----
+- Number Guess Game (1–100)
+- Bulls & Cows Game (4 unique digits)
+- Lives ♥️ & attempts tracking
+- Leaderboard with ranking
+- Global Chat Room (WebSocket)
+- JWT authentication & secure login
 
-## 🚀 Features
-- Random number generation  
-- Guess validation via API endpoints  
-- Real-time feedback  
-- Easy to integrate with frontend apps, bots, or games  
-- Health check for API status 
-
----
-
-## 🛠 Tech Stack
-- Python  
-- FastAPI  
-- Uvicorn  
+This project is fully modular and production-ready for learning, portfolio, or deployment purposes.
 
 ---
 
-## 📌 Endpoints
-### 0️⃣ /health
-**Method:** GET  
-Check if the API is up and running.  
-**Responses:**  
-- 200 OK – API is healthy.  
-Example: "API is running!"
+## Features
 
-### 1️⃣ /guess/{number}
-**Method:** GET  
-Submit a guess for the current game.  
-**Path Parameter:**  
-- number (integer, required) – The number you are guessing.
+### 🔐 User Authentication
+- Register / Login with username & password
+- JWT token-based authentication
+- Secure password hashing (bcrypt)
+- Track scores and wins per user
 
-**Responses:**  
-- 200 OK – Successful response, returns hint like "Too High", "Too Low", or "Correct".  
-Example: "Too High"  
-- 422 Validation Error – Invalid input (e.g., non-integer).  
-Example: 
-{
-  "detail": [
-    {
-      "loc": ["path", "number"],
-      "msg": "value is not a valid integer",
-      "type": "type_error.integer"
-    }
-  ]
-}
+### 🎯 Games
+- Number Guess
+    - Guess the number 1–100
+    - Lives ♥️ decrease with each wrong attempt
+    - Win → points added
+- Bulls & Cows
+    - Guess 4 unique digits
+    - Receive bulls & cows hints
+    - Lives ♥️ tracking & scoring
 
-### 2️⃣ /reset
-**Method:** GET  
-Resets the current game and generates a new random number.  
-**Responses:**  
-- 200 OK – Game reset successfully.  
-Example: "Game has been reset. Start guessing the new number!"
+### 🏆 Leaderboard
+- Global ranking by score
+- Top 10 players displayed
+- Points based on:
+    - Wins: +50 pts
+    - Remaining lives bonus: +5 pts per life
+    - Attempts efficiency
 
-## 💡 Usage
-1. Check API status with `/health`  
-2. Submit guesses via `/guess/{number}`  
-3. Reset game anytime with `/reset`  
+### 🌍 Global Chat Room
+- Real-time WebSocket chat
+- All logged-in users can send/receive messages
+- System messages (rank updates, wins) can be pushed
+- Fun, interactive multiplayer feel
 
-## 🎯 Why this project?
-- Learn **REST API design**  
-- Practice **game logic backend**  
-- Ready for **portfolio or freelancing demos**
+### ❤️ Lives System
+- Each game has limited lives
+- Wrong guesses reduce lives
+- Game over if lives = 0
+- Win bonuses depend on remaining lives
 
 ---
 
-## 📄 License
+## Project Structure
 
-MIT License
-
----
-
-## 🤝 Contributing
-Contributors are welcome!  
-• Add more games.
-
----
-
-## 👤 Author
-**anshkunj**  
-GitHub: https://github.com/anshkunj  
-Fiverr: https://www.fiverr.com/s/xX9mNXB  
-LinkedIn: https://linkedin.com/in/anshkunj 
+multiplayer_game/
+    main.py             # Entry point, routes
+    models.py           # Database models (User, Game)
+    logic.py            # Game logic (Bulls & Cows, hints)
+    auth.py             # JWT auth, register/login, password hashing
+    chat.py             # WebSocket chat manager
+    database.py         # DB setup & session
+    schemas.py          # Pydantic request/response schemas
+    requirements.txt    # Python dependencies
+    README.md           # Project documentation
 
 ---
 
-## ⭐ Support
-If you found this project helpful, give it a star ⭐  
-It motivates me to build more real-world APIs 🚀
+## Tech Stack
+
+- Python 3.10+
+- FastAPI
+- SQLAlchemy (SQLite, can upgrade to Postgres)
+- WebSockets for chat
+- JWT authentication
+- Passlib (bcrypt hashing)
 
 ---
 
-## 🔹 Note
-This repository is regularly updated with new scripts and improvements.
+## Setup & Installation
+
+1. Clone the repo:
+
+    git clone https://github.com/yourusername/multiplayer-game.git
+    cd multiplayer-game
+
+2. Install dependencies:
+
+    pip install -r requirements.txt
+
+3. Run the server:
+
+    uvicorn main:app --reload
+
+4. Open API docs to explore endpoints:
+
+    http://127.0.0.1:8000/docs
+
+5. Connect to global chat WebSocket:
+
+    ws://127.0.0.1:8000/ws/chat
+
+---
+
+## Usage
+
+1. Register / Login
+    - POST /register with username and password
+    - POST /login to get JWT token
+
+2. Start a Game
+    - Number Guess: POST /guess/start
+    - Bulls & Cows: POST /bulls-cows/start
+
+3. Play
+    - Number Guess: POST /guess/play with guess (int)
+    - Bulls & Cows: POST /bulls-cows/play with guess (str, 4 unique digits)
+
+4. Leaderboard
+    - GET /leaderboard shows top 10 players
+
+5. Global Chat
+    - Connect WebSocket to /ws/chat
+    - Send/receive messages in real-time
+
+---
+
+## Scoring System
+
+- Win = +50 points
+- Remaining lives bonus = +5 points per life
+- Leaderboard ranks players by total score
+- Efficient guesses = higher ranking
+
+---
+
+## Future Improvements
+
+- Friends-only chat
+- Daily/weekly leaderboard reset
+- Additional games
+- Frontend UI integration
+- Redis caching for chat & leaderboard
+- Mobile/web app deployment
+
+---
+
+## License
+
+MIT License  
+Free to use, modify, and extend.  
+
+---
+
+## Contact
+
+Made with ❤️ by Kunj  
+- Portfolio: [Your Portfolio URL]  
+- LinkedIn: [Your LinkedIn URL]  
+
+---
+
+> “Play, compete, chat, and climb the leaderboard — all in one real-time multiplayer-style game backend!”
