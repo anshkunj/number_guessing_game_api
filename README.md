@@ -83,7 +83,7 @@ multiplayer_game/
 
 ### Clone the repo:
 
-    git clone https://github.com/yourusername/multiplayer-game.git
+    git clone https://github.com/anshkunj/multiplayer-game.git
     cd multiplayer-game
 
 ### Install dependencies:
