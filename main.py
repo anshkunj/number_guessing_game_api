@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Depends, WebSocket
+from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 from database import Base, engine, SessionLocal
 from models import User, Game
