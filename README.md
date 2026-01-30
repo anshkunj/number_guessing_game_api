@@ -1,3 +1,10 @@
+<p align="center">
+  <img src="https://github.com/anshkunj/multiplayer-game/blob/5e04d2a80fa8ac66028d7fb9dda19206f56da06f/file_00000000063c72309c0aa3ad04fd0c05.png" alt="Multiplaye-Game 🎮🌍" width="1200">
+</p>
+
+<h1 align="center">Multiplayer-Game 🎮🌍</h1>
+<p align="center">Play this game and chat in global world 🚀</p>
+
 # Multiplayer-game 🎮🌍
 
 A real-time multiplayer-style game backend built with FastAPI, featuring:
