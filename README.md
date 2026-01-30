@@ -23,13 +23,13 @@ This project is fully modular and production-ready for learning, portfolio, or d
 
 ### 🎯 Games
 #### Number Guess
-    - Guess the number 1–100
-    - Lives ♥️ decrease with each wrong attempt
-    - Win → points added
+    • Guess the number 1–100
+    • Lives ♥️ decrease with each wrong attempt
+    • Win → points added
 #### Bulls & Cows
-    - Guess 4 unique digits
-    - Receive bulls & cows hints
-    - Lives ♥️ tracking & scoring
+    • Guess 4 unique digits
+    • Receive bulls & cows hints
+    • Lives ♥️ tracking & scoring
 
 ### 🏆 Leaderboard
 - Global ranking by score
