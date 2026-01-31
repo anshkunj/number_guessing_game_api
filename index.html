@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Multiplayer Number Game</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #0f172a;
+            color: #e5e7eb;
+            margin: 0;
+            padding: 0;
+        }
+        h2, h3 {
+            margin-top: 0;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 20px;
+        }
+        .card {
+            background: #111827;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        input, button {
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 6px;
+            border: none;
+            width: 100%;
+        }
+        button {
+            background: #2563eb;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #1d4ed8;
+        }
+        .row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .row button {
+            flex: 1;
+        }
+        #chatBox {
+            height: 200px;
+            overflow-y: auto;
+            background: #020617;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logout-btn {
+            background: #dc2626;
+        }
+        .logout-btn:hover {
+            background: #b91c1c;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+
+    <!-- ========== LOGIN ========== -->
+    <div id="login" class="card">
+        <h2>🔐 Login</h2>
+        <input id="username" placeholder="Username">
+        <input id="password" type="password" placeholder="Password">
+        <button onclick="login()">Login</button>
+    </div>
+
+    <!-- ========== DASHBOARD ========== -->
+    <div id="dashboard" class="card" style="display:none;">
+
+        <div class="top-bar">
+            <h2>🎮 Multiplayer Game</h2>
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+
+        <!-- GAME CONTROLS -->
+        <div class="card">
+            <h3>🕹 Games</h3>
+            <div class="row">
+                <button onclick="startNumberGuess()">Start Number Guess</button>
+                <button onclick="startBullsCows()">Start Bulls & Cows</button>
+            </div>
+
+            <input id="guessInput" placeholder="Enter your guess">
+            <button onclick="makeGuess()">Submit Guess</button>
+
+            <p id="lives"></p>
+            <p id="attempts"></p>
+            <p id="gameHint"></p>
+        </div>
+
+        <!-- CHAT -->
+        <div class="card">
+            <h3>💬 Global Chat</h3>
+            <div id="chatBox"></div>
+            <input id="chatInput" placeholder="Type message...">
+            <button onclick="sendChat()">Send</button>
+        </div>
+
+    </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
