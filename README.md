@@ -74,6 +74,10 @@ Once the token is removed, the user is considered logged out.
 ## Project Structure
 
 multiplayer_game/  
+├── frontend/  
+     ├── app.js  
+     ├── index.html  
+     ├── style.css  
 ├── main.py             # Entry point, routes  
 ├── models.py           # Database models (User, Game)  
 ├── logic.py            # Game logic (Bulls & Cows, hints)  
