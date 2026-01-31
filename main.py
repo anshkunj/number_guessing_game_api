@@ -25,8 +25,6 @@ Base.metadata.create_all(bind=engine)
 app = FastAPI(title="Multiplayer Number Game API")
 
 # ===== CORS =====
-from fastapi.middleware.cors import CORSMiddleware
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  # Change to frontend URL in production
