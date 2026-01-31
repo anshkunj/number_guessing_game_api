@@ -28,7 +28,7 @@ This project is fully modular and production-ready for learning, portfolio, or d
 - Secure password hashing (bcrypt)
 - Track scores and wins per user
 
-### Logout
+### 🔓Logout
 
 This application uses JWT-based authentication, which is stateless.
 
