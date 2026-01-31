@@ -171,15 +171,15 @@ function connectChat() {
 }
 
 function sendChat() {
+    if (!ws || ws.readyState !== WebSocket.OPEN) {
+        alert("Chat not connected");
+        return;
+    }
+
     const input = document.getElementById("chatInput");
     const msg = input.value.trim();
-    if (!msg || !ws || ws.readyState !== WebSocket.OPEN) return;
+    if (!msg) return;
 
     ws.send(msg);
-
-    const box = document.getElementById("chatBox");
-    box.innerHTML += `<b>You:</b> ${msg}<br>`;
-    box.scrollTop = box.scrollHeight;
-
     input.value = "";
 }
