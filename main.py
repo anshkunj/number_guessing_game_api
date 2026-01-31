@@ -81,7 +81,11 @@ def start_guess(
     )
     db.add(game)
     db.commit()
-    return {"message": "Number Guess game started", "lives": "♥️" * 7, "attempts": 0}
+    return {
+    "message": "Number Guess game started",
+    "lives": game.lives,
+    "attempts": 0
+}
 
 @app.post("/guess/play")
 def play_guess(
@@ -119,7 +123,11 @@ def play_guess(
         return {"result": "GAME OVER 💀", "number": game.secret}
 
     db.commit()
-    return {"hint": "too low" if data.guess < int(game.secret) else "too high", "lives": "♥️" * game.lives, "attempts": game.attempts}
+    return {
+    "hint": "too low" if data.guess < int(game.secret) else "too high",
+    "lives": game.lives,
+    "attempts": game.attempts
+}
 
 # ================= BULLS & COWS =================
 
@@ -138,7 +146,11 @@ def start_bulls_cows(
     )
     db.add(game)
     db.commit()
-    return {"message": "Bulls & Cows started", "lives": "♥️" * 10, "attempts": 0}
+    return {
+    "message": "Bulls & Cows started",
+    "lives": game.lives,
+    "attempts": 0
+}
 
 @app.post("/bulls-cows/play")
 def play_bulls_cows(
@@ -180,7 +192,12 @@ def play_bulls_cows(
         return {"result": "GAME OVER 💀", "secret": game.secret}
 
     db.commit()
-    return {"bulls": bulls, "cows": cows, "lives": "♥️" * game.lives, "attempts": game.attempts}
+    return {
+    "bulls": bulls,
+    "cows": cows,
+    "lives": game.lives,
+    "attempts": game.attempts
+}
 
 # ================= LEADERBOARD =================
 
