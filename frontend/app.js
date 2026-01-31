@@ -123,17 +123,17 @@ function sendChat() {
     const msg = input.value.trim();
     if (!msg) return;
 
-    if (!ws || ws.readyState !== WebSocket.OPEN) {
-        alert("Chat not connected");
+    if (!chatConnected) {
+        alert("Chat still connecting… wait 1 sec");
         return;
     }
 
     ws.send(msg);
 
     const chatBox = document.getElementById("chatBox");
-    const myMsg = document.createElement("div");
-    myMsg.innerHTML = `<b>You:</b> ${msg}`;
-    chatBox.appendChild(myMsg);
+    const div = document.createElement("div");
+    div.innerHTML = `<b>You:</b> ${msg}`;
+    chatBox.appendChild(div);
 
     input.value = "";
     chatBox.scrollTop = chatBox.scrollHeight;
