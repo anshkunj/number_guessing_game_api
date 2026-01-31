@@ -100,7 +100,11 @@ async function loadLeaderboard() {
 
 // ===== CHAT =====
 function connectChat(){
-    ws = new WebSocket(`${BACKEND_URL.replace(/^http/,"ws")}/ws/chat?token=${token}`);
+    const WS_URL = BACKEND_URL.startsWith("https")
+    ? BACKEND_URL.replace("https", "wss")
+    : BACKEND_URL.replace("http", "ws");
+
+ws = new WebSocket(`${WS_URL}/ws/chat?token=${token}`);
     ws.onmessage = (e) => {
     const chatBox = document.getElementById("chatBox");
 
