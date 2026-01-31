@@ -93,17 +93,32 @@ def leaderboard(db: Session = Depends(get_db)):
 # ================= GLOBAL CHAT =================
 @app.websocket("/ws/chat")
 async def global_chat(websocket: WebSocket):
+    print("🔥 WS request received")
+
     token = websocket.query_params.get("token")
-    if not token: await websocket.close(code=1008); return
+    print("TOKEN:", token)
+
+    if not token:
+        print("❌ No token")
+        await websocket.close(code=1008)
+        return
+
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-        user_id = payload.get("user_id")
-        if not user_id: raise JWTError
-    except JWTError: await websocket.close(code=1008); return
+        print("✅ JWT OK:", payload)
+    except Exception as e:
+        print("❌ JWT FAIL:", e)
+        await websocket.close(code=1008)
+        return
+
     await manager.connect(websocket)
+    print("✅ WS ACCEPTED")
+
     try:
         while True:
             msg = await websocket.receive_text()
+            print("📩 MSG:", msg)
             await manager.broadcast(msg)
     except WebSocketDisconnect:
+        print("🔌 WS DISCONNECT")
         manager.disconnect(websocket)
