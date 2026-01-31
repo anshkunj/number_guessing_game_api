@@ -1,0 +1,5 @@
+body { font-family: Arial; background: #f0f0f0; text-align:center; }
+.container { max-width:400px; margin:50px auto; padding:20px; background:white; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.2);}
+input, button { display:block; width:90%; margin:10px auto; padding:10px; }
+button { cursor:pointer; }
+.chatBox { border:1px solid #ccc; height:150px; overflow:auto; padding:5px; text-align:left; background:#eee; }
