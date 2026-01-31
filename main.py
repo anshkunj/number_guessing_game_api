@@ -194,12 +194,32 @@ def leaderboard(db: Session = Depends(get_db)):
 
 # ================= GLOBAL CHAT =================
 
+from jose import JWTError, jwt
+from auth import SECRET_KEY, ALGORITHM
+from fastapi import WebSocketDisconnect
+
 @app.websocket("/ws/chat")
 async def global_chat(websocket: WebSocket):
+    token = websocket.query_params.get("token")
+
+    if not token:
+        await websocket.close(code=1008)
+        return
+
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        user_id = payload.get("user_id")
+        if not user_id:
+            raise JWTError
+    except JWTError:
+        await websocket.close(code=1008)
+        return
+
     await manager.connect(websocket)
+
     try:
         while True:
             msg = await websocket.receive_text()
             await manager.broadcast(msg)
-    except:
+    except WebSocketDisconnect:
         manager.disconnect(websocket)
