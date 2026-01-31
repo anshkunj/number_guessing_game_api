@@ -106,13 +106,16 @@ function connectChat(){
     ws.onclose=()=>console.log("Chat disconnected");
 }
 
-function sendChat(){
-    const input=document.getElementById("chatInput");
-    const msg=input.value.trim();
-    if(!msg || !ws || ws.readyState!==WebSocket.OPEN) return;
+function sendChat() {
+    const input = document.getElementById("chatInput");
+    const msg = input.value.trim();
+
+    if (!msg) return;
+
     ws.send(msg);
-    const box=document.getElementById("chatBox");
-    box.innerHTML+=`<b>You:</b> ${msg}<br>`;
-    box.scrollTop=box.scrollHeight;
-    input.value="";
+
+    const chatBox = document.getElementById("chatBox");
+    chatBox.innerHTML += `<b>You:</b> ${msg}<br>`;
+
+    input.value = "";
 }
