@@ -28,6 +28,17 @@ This project is fully modular and production-ready for learning, portfolio, or d
 - Secure password hashing (bcrypt)
 - Track scores and wins per user
 
+### Logout
+
+This application uses JWT-based authentication, which is stateless.
+
+To logout:
+- Call the `/logout` endpoint
+- Delete the JWT token on the client side
+- Stop sending the `Authorization: Bearer <token>` header
+
+Once the token is removed, the user is considered logged out.
+
 ### 🎯 Games
 #### Number Guess
     • Guess the number 1–100
