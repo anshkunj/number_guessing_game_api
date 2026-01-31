@@ -1,3 +1,4 @@
+let chatConnected = false;
 const BACKEND_URL = "https://multiplayer-game-1x2u.onrender.com";
 
 let token = null;
@@ -108,15 +109,6 @@ ws = new WebSocket(`${WS_URL}/ws/chat?token=${token}`);
     ws.onmessage = (e) => {
     const chatBox = document.getElementById("chatBox");
 
-    const msgDiv = document.createElement("div");
-    msgDiv.textContent = e.data;
-
-    chatBox.appendChild(msgDiv);
-    chatBox.scrollTop = chatBox.scrollHeight;
-};
-    ws.onopen=()=>console.log("Chat connected");
-    ws.onclose=()=>console.log("Chat disconnected");
-}
 
 function sendChat() {
     const input = document.getElementById("chatInput");
