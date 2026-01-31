@@ -32,7 +32,7 @@ This project is fully modular and production-ready for learning, portfolio, or d
 
 This application uses JWT-based authentication, which is stateless.
 
-To logout:
+#### To logout:
 - Call the `/logout` endpoint
 - Delete the JWT token on the client side
 - Stop sending the `Authorization: Bearer <token>` header
