@@ -1,4 +1,4 @@
-const BACKEND_URL = "https://multiplayer-game-kg8a.onrender.com";
+const BACKEND_URL = "https://multiplayer-game-1x2u.onrender.com";
 
 let token = null;
 let ws = null;
