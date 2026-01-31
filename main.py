@@ -60,10 +60,6 @@ def login(
     token = create_token({"user_id": user.id})
     return {"access_token": token, "token_type": "bearer"}
 
-@app.post("/logout")
-def logout(token: str = Depends(oauth2_scheme)):
-    return {"message": "Logged out successfully. Delete token on client side."}
-
 # ================= NUMBER GUESS GAME =================
 
 @app.post("/guess/start")
