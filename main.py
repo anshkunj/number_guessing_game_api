@@ -3,11 +3,11 @@ from sqlalchemy.orm import Session
 import random
 
 # ===== Internal imports (package-style) =====
-from multiplayer_game.database import Base, engine
-from multiplayer_game.models import User, Game
-from multiplayer_game.schemas import Register, Guess, BullsCowsGuess
-from multiplayer_game.logic import generate_bulls_cows_number, check_bulls_cows
-from multiplayer_game.auth import (
+from database import Base, engine
+from models import User, Game
+from schemas import Register, Guess, BullsCowsGuess
+from logic import generate_bulls_cows_number, check_bulls_cows
+from auth import (
     get_db,
     hash_password,
     verify_password,
@@ -15,7 +15,7 @@ from multiplayer_game.auth import (
     get_current_user,
     oauth2_scheme
 )
-from multiplayer_game.chat import manager
+from chat import manager
 from fastapi.security import OAuth2PasswordRequestForm
 from fastapi.middleware.cors import CORSMiddleware
 
