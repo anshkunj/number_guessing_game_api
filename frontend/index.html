@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Multiplayer Number Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="login" class="container">
+    <h2>Login</h2>
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="login()">Login</button>
+    <p>Don't have an account? <a href="#" onclick="showRegister()">Register</a></p>
+</div>
+
+<div id="register" class="container" style="display:none;">
+    <h2>Register</h2>
+    <input type="text" id="regUsername" placeholder="Username">
+    <input type="password" id="regPassword" placeholder="Password">
+    <button onclick="registerUser()">Register</button>
+    <p>Already have an account? <a href="#" onclick="showLogin()">Login</a></p>
+</div>
+
+<div id="dashboard" class="container" style="display:none;">
+    <button onclick="logout()">Logout</button>
+    <h2>Welcome!</h2>
+    <div id="games">
+        <button onclick="startNumberGuess()">Start Number Guess</button>
+        <button onclick="startBullsCows()">Start Bulls & Cows</button>
+    </div>
+    <div id="gameStatus">
+        <p id="lives">Lives: 0</p>
+        <p id="attempts">Attempts: 0</p>
+        <p id="gameHint"></p>
+        <input type="text" id="guessInput" placeholder="Enter your guess">
+        <button onclick="makeGuess()">Submit Guess</button>
+    </div>
+    <h3>Leaderboard</h3>
+    <ul id="leaderboard"></ul>
+
+    <h3>Global Chat</h3>
+    <div id="chatBox" class="chatBox"></div>
+    <input type="text" id="chatInput" placeholder="Type message">
+    <button onclick="sendChat()">Send</button>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
