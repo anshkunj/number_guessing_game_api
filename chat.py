@@ -1,12 +1,11 @@
-from typing import List
 from fastapi import WebSocket
 
 class ConnectionManager:
     def __init__(self):
-        self.active_connections: List[WebSocket] = []
+        self.active_connections: list[WebSocket] = []
 
     async def connect(self, websocket: WebSocket):
-        await websocket.accept()
+        await websocket.accept()   # 🔥 THIS WAS MISSING
         self.active_connections.append(websocket)
 
     def disconnect(self, websocket: WebSocket):
