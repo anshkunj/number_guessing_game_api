@@ -101,7 +101,15 @@ async function loadLeaderboard() {
 // ===== CHAT =====
 function connectChat(){
     ws = new WebSocket(`${BACKEND_URL.replace(/^http/,"ws")}/ws/chat?token=${token}`);
-    ws.onmessage=(e)=>{ const box=document.getElementById("chatBox"); box.innerHTML+=e.data+"<br>"; box.scrollTop=box.scrollHeight; }
+    ws.onmessage = (e) => {
+    const chatBox = document.getElementById("chatBox");
+
+    const msgDiv = document.createElement("div");
+    msgDiv.textContent = e.data;
+
+    chatBox.appendChild(msgDiv);
+    chatBox.scrollTop = chatBox.scrollHeight;
+};
     ws.onopen=()=>console.log("Chat connected");
     ws.onclose=()=>console.log("Chat disconnected");
 }
