@@ -151,7 +151,9 @@ function connectChat() {
         `${BACKEND_URL.replace(/^http/, "ws")}/ws/chat?token=${token}`
     );
 
-    ws.onopen = () => console.log("Chat connected");
+    ws.onopen = () => {
+        console.log("✅ Chat connected");
+    };
 
     ws.onmessage = (e) => {
         const box = document.getElementById("chatBox");
@@ -159,7 +161,13 @@ function connectChat() {
         box.scrollTop = box.scrollHeight;
     };
 
-    ws.onclose = () => console.log("Chat disconnected");
+    ws.onerror = (e) => {
+        console.error("❌ Chat error", e);
+    };
+
+    ws.onclose = () => {
+        console.log("🔌 Chat closed");
+    };
 }
 
 function sendChat() {
